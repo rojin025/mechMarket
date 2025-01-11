@@ -1,3 +1,4 @@
 import { getAllListingsRoute } from "./getAllListings.js";
+import { getListing } from "./getListing.js";
 
-export default [getAllListingsRoute];
+export default [getAllListingsRoute, getListing];
