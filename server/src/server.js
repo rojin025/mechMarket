@@ -8,6 +8,13 @@ const start = async () => {
   server = Hapi.server({
     port: 8000,
     host: "localhost",
+    routes: {
+      cors: {
+        origin: ["*"], // Allow all origins (for development purposes)
+        headers: ["Accept", "Content-Type"],
+        credentials: true, // Allow credentials (cookies, authorization headers)
+      },
+    },
   });
 
   routes.forEach((route) => server.route(route));
