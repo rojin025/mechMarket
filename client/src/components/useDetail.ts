@@ -1,7 +1,15 @@
-// import { useQueryClient } from "@tanstack/react-query";
+import { getListingById } from "@/services/apiListings";
+import { useQuery } from "@tanstack/react-query";
 
-// export function useDetail() {
-//   const queryClient = useQueryClient();
+export function useDetails(id: string) {
+  const {
+    data: product,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["product", id],
+    queryFn: () => getListingById(id as string),
+  });
 
-//   const;
-// }
+  return { isLoading, error, product };
+}
