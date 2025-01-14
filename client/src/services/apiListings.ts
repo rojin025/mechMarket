@@ -1,3 +1,7 @@
+import axios from "axios";
+
+const BASE_URL = "http://localhost:8000";
+
 // services/listingService.ts
 export const getAllListings = async () => {
   try {
@@ -9,3 +13,12 @@ export const getAllListings = async () => {
     throw error;
   }
 };
+
+export async function getListingById(id: string) {
+  try {
+    const response = await axios.get(`${BASE_URL}/api/listings/${id}`);
+    console.log(response);
+  } catch (error) {
+    console.error(error);
+  }
+}

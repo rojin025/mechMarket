@@ -1,9 +1,11 @@
 import {
   Card,
+  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useParams } from "react-router-dom";
 
 export type ProductType = {
   id: string;
@@ -16,15 +18,10 @@ interface ProductProps {
   product: ProductType;
 }
 
-function ProductCard({
-  product = {
-    id: "id",
-    name: "name",
-    description: "default des",
-    price: 0,
-  },
-}: ProductProps) {
-  const { name, description } = product;
+function ProductDetail() {
+  const { id } = useParams();
+
+  //   const { name, description, price } = product;
 
   return (
     <Card className="w-[350px]">
@@ -32,8 +29,13 @@ function ProductCard({
         <CardTitle>{name}</CardTitle>
         <CardDescription>{description}</CardDescription>
       </CardHeader>
+      <CardContent>
+        <div className="grid w-full items-center gap-4">
+          <div className="flex flex-col space-y-1.5">{price} </div>
+        </div>
+      </CardContent>
     </Card>
   );
 }
 
-export default ProductCard;
+export default ProductDetail;
