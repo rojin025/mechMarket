@@ -7,6 +7,7 @@ import ProductList from "./components/ProductList";
 import AppLayout from "./components/ui/AppLayout";
 import ProductDetail from "./components/ProductDetail";
 import PageNotFound from "./pages/PageNotFound";
+import CreateListingForm from "./features/listings/CreateListingForm";
 
 function App() {
   const queryClient = new QueryClient({
@@ -19,13 +20,14 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools intialIsOpen={false} />
+      <ReactQueryDevtools initialIsOpen={false} />
 
       <BrowserRouter>
         <Routes>
           <Route element={<AppLayout />}>
             <Route index element={<Navigate replace to="listings" />} />
             <Route path="listings" element={<ProductList />} />
+            <Route path="/new-listing" element={<CreateListingForm />} />
             <Route path="listings/:id" element={<ProductDetail />} />
           </Route>
 

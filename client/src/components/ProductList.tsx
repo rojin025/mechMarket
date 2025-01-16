@@ -2,9 +2,19 @@ import { useEffect, useState } from "react";
 import ProductCard, { ProductType } from "./ProductCard";
 import { useProducts } from "./useProducts";
 import { getAllListings } from "@/services/apiListings";
+import { Button } from "./ui/button";
+import useNav from "@/hooks/useNav";
 
 function ProductList() {
   const { isLoading, listings } = useProducts();
+  const navigateTo = useNav("/new-listing");
+
+  // const navigate = useNavigate();
+
+  const handleCreateForm = () => {
+    console.log("Clicked");
+    navigateTo();
+  };
 
   // V1 using effects and state
   //   const [listings, setListings] = useState<ProductType[]>([]);
@@ -17,7 +27,11 @@ function ProductList() {
 
   return (
     <>
-      <h1>Product List</h1>
+      <div className="flex justify-between">
+        <p className="text-2xl ">Product List</p>
+        <Button onClick={handleCreateForm}>Create listing</Button>
+      </div>
+
       <div>
         {listings.map((p: ProductType) => (
           <ProductCard key={p.id} product={p} />
