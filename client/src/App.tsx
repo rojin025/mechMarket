@@ -6,6 +6,7 @@ import "./App.css";
 import ProductList from "./components/ProductList";
 import AppLayout from "./components/ui/AppLayout";
 import ProductDetail from "./components/ProductDetail";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
   const queryClient = new QueryClient({
@@ -27,6 +28,8 @@ function App() {
             <Route path="listings" element={<ProductList />} />
             <Route path="listings/:id" element={<ProductDetail />} />
           </Route>
+
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>
