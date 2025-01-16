@@ -3,9 +3,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import "./App.css";
-import ProductList from "./components/ProductList";
+import ProductList from "./features/listings/ProductList";
 import AppLayout from "./components/ui/AppLayout";
-import ProductDetail from "./components/ProductDetail";
+import ProductDetail from "./features/listings/ProductDetail";
 import PageNotFound from "./pages/PageNotFound";
 import CreateListingForm from "./features/listings/CreateListingForm";
 

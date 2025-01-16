@@ -41,13 +41,26 @@ export async function addViewToListingRoute(id: string) {
   }
 }
 
+export type createReturn = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  user_id: string;
+  views: number;
+};
+
 export async function createNewListing(
   name: string,
   description: string,
   price: number
-) {
+): Promise<createReturn> {
   try {
-    const { data, status } = await axios.post(`${BASE_URL}/api/listings`);
+    const { data, status } = await axios.post(`${BASE_URL}/api/listings`, {
+      name,
+      description,
+      price,
+    });
 
     if (status !== 200) throw new Error("Unable to create new listng.");
 

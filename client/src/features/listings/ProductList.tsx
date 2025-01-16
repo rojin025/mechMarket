@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
 import ProductCard, { ProductType } from "./ProductCard";
-import { useProducts } from "./useProducts";
+import { useProducts } from "./useProducts.ts";
 import { getAllListings } from "@/services/apiListings";
-import { Button } from "./ui/button";
-import useNav from "@/hooks/useNav";
+import { Button } from "../../components/ui/button";
+import useNavigateTo from "@/hooks/useNavigateTo";
 
 function ProductList() {
   const { isLoading, listings } = useProducts();
-  const navigateTo = useNav("/new-listing");
-
-  // const navigate = useNavigate();
+  const navigateTo = useNavigateTo("/new-listing");
 
   const handleCreateForm = () => {
     console.log("Clicked");
