@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useCreateListing } from "./useCreateListing";
 
 const formSchema = z.object({
   name: z.string().min(8, {
@@ -27,6 +28,8 @@ const formSchema = z.object({
 });
 
 function CreateListingForm() {
+  const { isCreating, createListing } = useCreateListing();
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -39,9 +42,7 @@ function CreateListingForm() {
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+    createListing(values);
   }
 
   return (
@@ -93,7 +94,9 @@ function CreateListingForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Create New Listing</Button>
+        <Button type="submit" disabled={isCreating}>
+          Create New Listing
+        </Button>
       </form>
     </Form>
   );

@@ -1,3 +1,4 @@
+import { ListingInput } from "@/features/listings/useCreateListing";
 import axios from "axios";
 
 const BASE_URL = "http://localhost:8000";
@@ -45,17 +46,17 @@ export type createReturn = {
   id: string;
   name: string;
   description: string;
-  price: number;
+  price: string;
   user_id: string;
   views: number;
 };
 
 export async function createNewListing(
-  name: string,
-  description: string,
-  price: number
-): Promise<createReturn> {
+  newListing: ListingInput
+): Promise<boolean> {
   try {
+    const { name, description, price } = newListing;
+
     const { data, status } = await axios.post(`${BASE_URL}/api/listings`, {
       name,
       description,
@@ -63,11 +64,17 @@ export async function createNewListing(
     });
 
     if (status !== 200) throw new Error("Unable to create new listng.");
-
-    return data;
+    console.log(data);
+    return true;
   } catch (error) {
     console.error(
       `Error creating new Listing: ${name}, ${description} and ${price} `
     );
+    return false;
   }
+}
+
+async function waitThreeSeconds(): Promise<void> {
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+  console.log("3 seconds have passed!");
 }

@@ -2,23 +2,22 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import { createNewListing } from "@/services/apiListings";
 
-// Define the expected input type for the mutation function
-type ListingInput = {
+export interface ListingInput {
   name: string;
   description: string;
-  price: number;
-};
+  price: string;
+}
 
 export function useCreateListing() {
   const queryClient = useQueryClient();
 
-  const { mutate: createListing, isLoading: isCreating } = useMutation({
-    mutationFn: (input: ListingInput) => createListing(input),
+  const { mutate: createListing, isPending: isCreating } = useMutation({
+    mutationFn: (newListing: ListingInput) => createNewListing(newListing), // Ensure createNewListing accepts all ListingInput fields
     onSuccess: () => {
       toast.success("New listing created.");
       queryClient.invalidateQueries({ queryKey: ["listings"] });
     },
-    onError: (err) => toast.error(err.message),
+    onError: (err: Error) => toast.error(err.message),
   });
 
   return { isCreating, createListing };
