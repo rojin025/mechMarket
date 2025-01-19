@@ -35,11 +35,12 @@ function ProductCard({
         <CardTitle>{name}</CardTitle>
         <CardDescription>{description}</CardDescription>
       </CardHeader>
-      <CardFooter className="flex justify-end">
+      <CardFooter className="flex justify-between ">
         {" "}
         <Link to={`/listings/${id}`}>
           <Button>{name} Details</Button>
         </Link>
+        <Button className="bg-red-900">Delete</Button>
       </CardFooter>
     </Card>
   );
