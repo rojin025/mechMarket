@@ -74,6 +74,28 @@ export async function createNewListing(
   }
 }
 
+export async function deleteListing(id: string): Promise<boolean> {
+  try {
+    const response = await axios.delete(`${BASE_URL}/api/listings/${id}`);
+
+    console.log("Delete Response", response);
+
+    if (response.status !== 200) throw new Error(`Cannot delete id: ${id}`);
+
+    return true;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error("Response data:", error.response?.data);
+      console.error("Response status:", error.response?.status);
+      console.error("Response headers:", error.response?.headers);
+    }
+
+    console.error(error);
+
+    throw error;
+  }
+}
+
 async function waitThreeSeconds(): Promise<void> {
   await new Promise((resolve) => setTimeout(resolve, 3000));
   console.log("3 seconds have passed!");

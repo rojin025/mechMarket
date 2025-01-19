@@ -16,10 +16,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { useCreateListing } from "./useCreateListing";
 
 const formSchema = z.object({
-  name: z.string().min(8, {
+  name: z.string().min(1, {
     message: "name must be at least 8 characters.",
   }),
-  description: z.string().min(8, {
+  description: z.string().min(1, {
     message: "name must be at least 8 characters.",
   }),
   price: z.string().min(1, {

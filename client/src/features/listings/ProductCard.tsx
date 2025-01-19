@@ -7,6 +7,8 @@ import {
 } from "@/components/ui/card";
 import { Button } from "../../components/ui/button";
 import { Link } from "react-router-dom";
+// import { deleteListing } from "@/services/apiListings";
+import { useDelete } from "./useDelete";
 
 export type ProductType = {
   id: string;
@@ -28,9 +30,22 @@ function ProductCard({
   },
 }: ProductProps) {
   const { name, description, id } = product;
+  const { deleteListing, isDeleting } = useDelete();
+
+  const handleClick = () => {
+    // const isConfirmed = confirm("Are you sure?");
+    // if (isConfirmed) {
+    //   console.log(id);
+    //   deleteListing(id);
+    // }
+
+    deleteListing(id);
+
+    console.log("Delete");
+  };
 
   return (
-    <Card className="w-[350px]">
+    <Card className="w-[350px] my-2">
       <CardHeader>
         <CardTitle>{name}</CardTitle>
         <CardDescription>{description}</CardDescription>
@@ -38,9 +53,15 @@ function ProductCard({
       <CardFooter className="flex justify-between ">
         {" "}
         <Link to={`/listings/${id}`}>
-          <Button>{name} Details</Button>
+          <Button>Details</Button>
         </Link>
-        <Button className="bg-red-900">Delete</Button>
+        <Button
+          onClick={handleClick}
+          disabled={isDeleting}
+          className="bg-red-900"
+        >
+          Delete
+        </Button>
       </CardFooter>
     </Card>
   );
