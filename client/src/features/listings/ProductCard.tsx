@@ -44,6 +44,10 @@ function ProductCard({
     console.log("Delete");
   };
 
+  const handleEdit = () => {
+    console.log("Editing ", id);
+  };
+
   return (
     <Card className="w-[350px] my-2">
       <CardHeader>
@@ -51,11 +55,16 @@ function ProductCard({
         <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardFooter className="flex justify-between ">
-        {" "}
         <Link to={`/listings/${id}`}>
           <Button>Details</Button>
         </Link>
-        <Button className="bg-blue-900">Edit</Button>
+
+        <Link to={`edit/${id}`}>
+          <Button className="bg-blue-900" onClick={handleEdit}>
+            Edit
+          </Button>
+        </Link>
+
         <Button
           onClick={handleDelete}
           disabled={isDeleting}

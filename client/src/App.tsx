@@ -8,6 +8,7 @@ import AppLayout from "./components/ui/AppLayout";
 import ProductDetail from "./features/listings/ProductDetail";
 import PageNotFound from "./pages/PageNotFound";
 import CreateListingForm from "./features/listings/CreateListingForm";
+import EditProduct from "./features/listings/EditProduct";
 
 function App() {
   const queryClient = new QueryClient({
@@ -27,8 +28,9 @@ function App() {
           <Route element={<AppLayout />}>
             <Route index element={<Navigate replace to="listings" />} />
             <Route path="listings" element={<ProductList />} />
-            <Route path="/new-listing" element={<CreateListingForm />} />
+            <Route path="new-listing" element={<CreateListingForm />} />
             <Route path="listings/:id" element={<ProductDetail />} />
+            <Route path="listings/edit/:id" element={<EditProduct />} />
           </Route>
 
           <Route path="*" element={<PageNotFound />} />
