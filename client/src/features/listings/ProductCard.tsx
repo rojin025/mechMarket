@@ -32,14 +32,14 @@ function ProductCard({
   const { name, description, id } = product;
   const { deleteListing, isDeleting } = useDelete();
 
-  const handleClick = () => {
-    // const isConfirmed = confirm("Are you sure?");
-    // if (isConfirmed) {
-    //   console.log(id);
-    //   deleteListing(id);
-    // }
+  const handleDelete = () => {
+    const isConfirmed = confirm("Are you sure?");
+    if (isConfirmed) {
+      console.log(id);
+      deleteListing(id);
+    }
 
-    deleteListing(id);
+    // deleteListing(id);
 
     console.log("Delete");
   };
@@ -55,8 +55,9 @@ function ProductCard({
         <Link to={`/listings/${id}`}>
           <Button>Details</Button>
         </Link>
+        <Button className="bg-blue-900">Edit</Button>
         <Button
-          onClick={handleClick}
+          onClick={handleDelete}
           disabled={isDeleting}
           className="bg-red-900"
         >

@@ -4,10 +4,12 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
+  CardFooter,
 } from "@/components/ui/card";
 
 import { useParams } from "react-router-dom";
 import { useDetails } from "./useDetail";
+import { Button } from "@/components/ui/button";
 
 export type ProductType = {
   id: string;
@@ -49,6 +51,9 @@ function ProductDetail() {
           <div className="flex flex-col space-y-1.5">{price} </div>
         </div>
       </CardContent>
+      <CardFooter>
+        <Button>Edit</Button>
+      </CardFooter>
     </Card>
   );
 }
