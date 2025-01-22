@@ -67,9 +67,7 @@ export async function createNewListing(
     console.log(data);
     return true;
   } catch (error) {
-    console.error(
-      `Error creating new Listing: ${name}, ${description} and ${price} `
-    );
+    console.error(`Error creating new Listing. `);
     return false;
   }
 }
