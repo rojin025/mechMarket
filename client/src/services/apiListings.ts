@@ -96,6 +96,31 @@ export async function deleteListing(id: string): Promise<boolean> {
   }
 }
 
+type editProductType = {
+  id: string;
+  name: string;
+  description: string;
+  price: string;
+};
+
+export async function editListing(newProduct: editProductType) {
+  console.log("Edit Api: ", newProduct);
+  try {
+    const { id, name, description, price } = newProduct;
+    const response = await axios.post(`${BASE_URL}/api/listings/${id}`, {
+      name,
+      price,
+      description,
+    });
+
+    if (response.status !== 200)
+      throw new Error("Something went wrong Updating product.");
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
 async function waitThreeSeconds(): Promise<void> {
   await new Promise((resolve) => setTimeout(resolve, 3000));
   console.log("3 seconds have passed!");
