@@ -9,6 +9,8 @@ import ProductDetail from "./features/listings/ProductDetail";
 import PageNotFound from "./pages/PageNotFound";
 import CreateListingForm from "./features/listings/CreateListingForm";
 import EditProduct from "./features/listings/EditProduct";
+import LoginPage from "./pages/login/page";
+import SignUpPage from "./pages/signup/page";
 
 function App() {
   const queryClient = new QueryClient({
@@ -33,6 +35,8 @@ function App() {
             <Route path="listings/edit/:id" element={<EditProduct />} />
           </Route>
 
+          <Route path="login" element={<LoginPage />} />
+          <Route path="signup" element={<SignUpPage />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
