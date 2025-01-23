@@ -23,14 +23,16 @@ export const createNewListingRoute = {
         [id, name, description, price, userId, views]
       );
 
-      return h.response({
-        id,
-        name,
-        description,
-        price,
-        user_id: userId,
-        views,
-      });
+      return h
+        .response({
+          id,
+          name,
+          description,
+          price,
+          user_id: userId,
+          views,
+        })
+        .code(200);
     } catch (error) {
       console.log("Database Error:", error);
       return h
