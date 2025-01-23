@@ -16,9 +16,11 @@ import {
   MenubarSubTrigger,
   MenubarTrigger,
 } from "@/components/ui/menubar";
+import { useNavigate } from "react-router-dom";
 
 export default function MainNav() {
-  const handleLogOut = () => {
+  const navigate = useNavigate();
+  const handleSignOut = () => {
     signOut(auth)
       .then(() => {
         console.log("Signed out successfully.");
@@ -91,10 +93,12 @@ export default function MainNav() {
             <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
           </MenubarRadioGroup>
           <MenubarSeparator />
-          <MenubarItem inset>Edit...</MenubarItem>
+          <MenubarItem inset onClick={() => navigate("/login")}>
+            Log In
+          </MenubarItem>
           <MenubarSeparator />
-          <MenubarItem inset onClick={handleLogOut}>
-            Log Out
+          <MenubarItem inset onClick={handleSignOut}>
+            Sign Out
           </MenubarItem>
         </MenubarContent>
       </MenubarMenu>
