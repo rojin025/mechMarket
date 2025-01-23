@@ -1,3 +1,6 @@
+import { auth } from "@/services/firebase";
+import { signOut } from "firebase/auth";
+
 import {
   Menubar,
   MenubarCheckboxItem,
@@ -15,6 +18,16 @@ import {
 } from "@/components/ui/menubar";
 
 export default function MainNav() {
+  const handleLogOut = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("Signed out successfully.");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <Menubar>
       <MenubarMenu>
@@ -68,26 +81,7 @@ export default function MainNav() {
           <MenubarItem>Paste</MenubarItem>
         </MenubarContent>
       </MenubarMenu>
-      <MenubarMenu>
-        <MenubarTrigger>View</MenubarTrigger>
-        <MenubarContent>
-          <MenubarCheckboxItem>Always Show Bookmarks Bar</MenubarCheckboxItem>
-          <MenubarCheckboxItem checked>
-            Always Show Full URLs
-          </MenubarCheckboxItem>
-          <MenubarSeparator />
-          <MenubarItem inset>
-            Reload <MenubarShortcut>⌘R</MenubarShortcut>
-          </MenubarItem>
-          <MenubarItem disabled inset>
-            Force Reload <MenubarShortcut>⇧⌘R</MenubarShortcut>
-          </MenubarItem>
-          <MenubarSeparator />
-          <MenubarItem inset>Toggle Fullscreen</MenubarItem>
-          <MenubarSeparator />
-          <MenubarItem inset>Hide Sidebar</MenubarItem>
-        </MenubarContent>
-      </MenubarMenu>
+
       <MenubarMenu>
         <MenubarTrigger>Profiles</MenubarTrigger>
         <MenubarContent>
@@ -99,7 +93,9 @@ export default function MainNav() {
           <MenubarSeparator />
           <MenubarItem inset>Edit...</MenubarItem>
           <MenubarSeparator />
-          <MenubarItem inset>Add Profile...</MenubarItem>
+          <MenubarItem inset onClick={handleLogOut}>
+            Log Out
+          </MenubarItem>
         </MenubarContent>
       </MenubarMenu>
     </Menubar>

@@ -11,8 +11,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link, useNavigate } from "react-router-dom";
 
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/services/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 export function SignUpForm({
   className,
