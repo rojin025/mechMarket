@@ -92,11 +92,21 @@ export async function createNewListing(
 
 export async function deleteListing(id: string): Promise<boolean> {
   try {
-    const response = await axios.delete(`${BASE_URL}/api/listings/${id}`);
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (!user) throw new Error("User not found");
+
+    const token = await user.getIdToken();
+
+    const response = await axios.delete(`${BASE_URL}/api/listings/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        "Auth-Token": token,
+      },
+    });
 
     console.log("Delete Response", response);
-
-    if (response.status !== 200) throw new Error(`Cannot delete id: ${id}`);
 
     return true;
   } catch (error) {
