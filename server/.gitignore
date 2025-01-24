@@ -2,5 +2,7 @@ node_modules
 google-cloud-sdk/
 
 .env
+app.yaml    
 
 credentials.json
+.gcloudignore
