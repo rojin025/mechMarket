@@ -1,4 +1,6 @@
 node_modules
+google-cloud-sdk/
+
 .env
 
 credentials.json
