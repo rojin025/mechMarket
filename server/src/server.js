@@ -18,7 +18,7 @@ const start = async () => {
     routes: {
       cors: {
         origin: ["*"], // Allow all origins (for development purposes)
-        headers: ["Accept", "Content-Type"],
+        headers: ["Accept", "Content-Type", "Auth-Token"],
         credentials: true, // Allow credentials (cookies, authorization headers)
       },
     },

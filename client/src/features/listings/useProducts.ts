@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getAllListings } from "@/services/apiListings";
+import { getUserListings } from "@/services/apiUser";
 
 export function useProducts() {
   const {
@@ -8,7 +9,7 @@ export function useProducts() {
     error,
   } = useQuery({
     queryKey: ["listings"],
-    queryFn: getAllListings,
+    queryFn: getUserListings,
   });
 
   return { isLoading, error, listings };

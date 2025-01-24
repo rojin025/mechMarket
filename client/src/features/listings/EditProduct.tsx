@@ -14,7 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { editListing, getListingById } from "@/services/apiListings";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { setMaxListeners } from "events";
 
@@ -33,6 +33,7 @@ const formSchema = z.object({
 function EditProduct() {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -65,10 +66,11 @@ function EditProduct() {
   }, [id, form]);
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     if (!id) throw new Error("Id is undefined");
 
-    editListing({ ...values, id });
+    const isSuccess = await editListing({ ...values, id });
+    if (isSuccess) navigate("/listings");
   }
 
   if (loading) return <div>Loading...</div>;

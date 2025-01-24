@@ -1,7 +1,9 @@
-import { ListingInput } from "@/features/listings/useCreateListing";
 import axios from "axios";
+import { ListingInput } from "@/features/listings/useCreateListing";
 
-const BASE_URL = "http://localhost:8000";
+import { getAuth } from "firebase/auth";
+
+export const BASE_URL = "http://localhost:8000";
 
 // services/listingService.ts
 export const getAllListings = async () => {
@@ -55,16 +57,32 @@ export async function createNewListing(
   newListing: ListingInput
 ): Promise<boolean> {
   try {
+    const auth = getAuth();
+    const user = auth.currentUser;
     const { name, description, price } = newListing;
 
-    const { data, status } = await axios.post(`${BASE_URL}/api/listings`, {
-      name,
-      description,
-      price,
-    });
+    if (!user) throw new Error("No User.");
+
+    const token = await user.getIdToken();
+    const { data, status } = await axios.post(
+      `${BASE_URL}/api/listings`,
+      {
+        name,
+        description,
+        price,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Auth-Token": token,
+        },
+      }
+    );
 
     if (status !== 200) throw new Error("Unable to create new listng.");
+
     console.log(data);
+
     return true;
   } catch (error) {
     console.error(`Error creating new Listing. `);
@@ -101,21 +119,42 @@ type editProductType = {
   price: string;
 };
 
-export async function editListing(newProduct: editProductType) {
+export async function editListing(
+  newProduct: editProductType
+): Promise<boolean> {
   console.log("Edit Api: ", newProduct);
   try {
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (!user) throw new Error("User not found.");
+
+    const token = await user.getIdToken();
+
     const { id, name, description, price } = newProduct;
-    const response = await axios.post(`${BASE_URL}/api/listings/${id}`, {
-      name,
-      price,
-      description,
-    });
+    const response = await axios.post(
+      `${BASE_URL}/api/listings/${id}`,
+      {
+        name,
+        price,
+        description,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Auth-Token": token,
+        },
+      }
+    );
 
     if (response.status !== 200)
       throw new Error("Something went wrong Updating product.");
+
+    return true;
   } catch (error) {
     console.log(error);
-    throw error;
+
+    return false;
   }
 }
 

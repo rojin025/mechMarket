@@ -1,11 +1,19 @@
 import { v4 as uuidv4 } from "uuid";
 import { db } from "../database.js";
+import admin from "firebase-admin";
+import Boom from "@hapi/boom";
 
 export const createNewListingRoute = {
   method: "POST",
   path: "/api/listings",
   handler: async (req, h) => {
     try {
+      const token = req.headers["auth-token"];
+      if (!token) return Boom.unauthorized("Missing token.");
+
+      const decodedToken = await admin.auth().verifyIdToken(token);
+      const userId = decodedToken.uid;
+
       const id = uuidv4();
       const {
         name = "Unnamed Listing",
@@ -14,7 +22,7 @@ export const createNewListingRoute = {
       } = req.payload;
 
       const views = 0;
-      const userId = "12345";
+      // const userId = "12345";
 
       await db.query(
         `
