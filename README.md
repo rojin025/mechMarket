@@ -1,17 +1,14 @@
-# Mech Market
+# Fullstack Deployment: React, NodeJS, SQL
 
-Full Stack - Angular | Node | MySQL | GoogleCloud
-
-# Fullstack Deployment: Angular, NodeJS, SQL
-
-This project demonstrates a comprehensive workflow for deploying a fullstack application using Angular for the frontend, Node.js for the backend, and MySQL for the database. It provides a complete implementation from setting up the environment to hosting the application on Google Cloud.
+This project demonstrates a comprehensive workflow for deploying a fullstack application using React for the frontend, Node.js for the backend, and MySQL for the database. It provides a complete implementation from setting up the environment to hosting the application on Google Cloud.
 
 # Project Overview
 
 ## Tech Stack
 
-- Frontend: Angular
+- Frontend: React , Shadcn/ui
 - Backend: Node.js (Hapi framework)
+- Auth: Firebase Auth
 - Database: MySQL
 - Deployment: Google Cloud Platform (GCP)
 
@@ -19,7 +16,7 @@ This project demonstrates a comprehensive workflow for deploying a fullstack app
 
 1. Frontend:
 
-- Dynamic UI built with Angular.
+- Dynamic UI built with React.
 - CRUD operations integrated with backend API.
 - Responsive design for desktop and mobile.
 
@@ -43,7 +40,6 @@ This project demonstrates a comprehensive workflow for deploying a fullstack app
 
 - Prerequisites
 - Node.js (v16 or above)
-- Angular CLI
 - MySQL
 - Google Cloud CLI
 
@@ -52,8 +48,8 @@ This project demonstrates a comprehensive workflow for deploying a fullstack app
 1. Clone the Repository:
 
 ```
-git clone https://github.com/your-repo/fullstack-angular-node-sql.git
-cd fullstack-angular-node-sql
+git clone https://github.com/your-repo/fullstack-React-node-sql.git
+cd fullstack-React-node-sql
 ```
 
 2. Frontend Setup:
@@ -61,7 +57,7 @@ cd fullstack-angular-node-sql
 ```
 cd frontend
 npm install
-ng serve
+npm run dev
 
 ```
 
@@ -70,7 +66,7 @@ ng serve
 ```
 cd backend
 npm install
-node server.js
+npm run start
 
 ```
 
